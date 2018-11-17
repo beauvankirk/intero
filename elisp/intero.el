@@ -512,6 +512,14 @@ line as a type signature."
         (insert help-string)
         (goto-char (point-min))))))
 
+(defun intero-hoogle-at (ident)
+  "Get the info of the thing with IDENT at point."
+  (interactive (list (intero-ident-at-point)))
+  (let ((origin-buffer (current-buffer))
+        (package (intero-package-name))
+        (origin (buffer-name)))
+    (intero-hoogle-blocking-query ident)))
+
 (defun intero-goto-definition ()
   "Jump to the definition of the thing at point.
 Returns nil when unable to find definition."
@@ -1851,6 +1859,10 @@ type as arguments."
           (save-excursion (goto-char end)
                           (1+ (current-column)))
           (buffer-substring-no-properties beg end)))
+
+(defun intero-get-hoogle-of (thing)
+  "Get hoogle for THING."
+  (intero-hoogle-blocking-query thing))
 
 (defun intero-get-info-of (thing)
   "Get info for THING."
