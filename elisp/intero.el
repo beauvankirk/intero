@@ -515,10 +515,7 @@ line as a type signature."
 (defun intero-hoogle-at (ident)
   "Get the info of the thing with IDENT at point."
   (interactive (list (intero-ident-at-point)))
-  (let ((origin-buffer (current-buffer))
-        (package (intero-package-name))
-        (origin (buffer-name)))
-    (intero-hoogle-blocking-query ident)))
+  (intero-hoogle-blocking-query ident)))
 
 (defun intero-goto-definition ()
   "Jump to the definition of the thing at point.
